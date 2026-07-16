@@ -177,3 +177,34 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
+/*=======================contact================*/
+const form = document.getElementById("contact-form");
+
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Send email to you
+        emailjs.sendForm(
+            "service_cyutua8",
+            "template_0hdioes",
+            this
+        )
+        .then(() => {
+            // Send auto reply to the visitor
+            return emailjs.sendForm(
+                "service_cyutua8",
+                "template_uwrzmar",
+                this
+            );
+        })
+        .then(() => {
+            alert("Message sent successfully!");
+            form.reset();
+        })
+        .catch((error) => {
+            alert("Failed to send message.");
+            console.error(error);
+        });
+    });
+}
